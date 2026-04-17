@@ -1,0 +1,16 @@
+{
+  "name": "examples",
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build"
+  },
+  "dependencies": {
+    "ft-editor": "workspace:*",
+    "tailwindcss": "^3.4.3",
+    "openai": "4.47.1",
+    "prosemirror-docx": "latest",
+    "file-saver": "latest",
+    "vite-svg-loader": "latest"
+  }
+}

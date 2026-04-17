@@ -1,0 +1,174 @@
+<script setup lang="ts">
+import { ref, computed } from 'vue'
+import { nodeViewProps, NodeViewWrapper } from '@tiptap/vue-3'
+
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { Icon } from '@/components/icons'
+import { useLocale } from '@/locales'
+const props = defineProps({
+  ...nodeViewProps,
+})
+
+const link = ref<string>('')
+const loading = ref<boolean>(false)
+const fileInput = ref()
+const isPopoverOpen = ref(true)
+
+const { t } = useLocale()
+
+function handleFile(event) {
+  loading.value = true
+  const files = event?.target?.files
+  if (!props.editor || props.editor.isDestroyed || !files || files.length === 0) return
+  const file = files[0]
+  const uploadOptions = props.editor.extensionManager.extensions.find(
+    extension => extension.name === 'videoUpload'
+  )?.options
+  uploadOptions?.upload(file).then(res => {
+    props.editor
+      .chain()
+      .setVideo({ src: res, width: '100%' })
+      .deleteRange({ from: props.getPos(), to: props.getPos() })
+      .run()
+    loading.value = false
+    isPopoverOpen.value = false // 上传成功后关闭弹窗
+  })
+}
+function handleLink() {
+  props.editor
+    .chain()
+    .setVideo({
+      src: link.value,
+      width: '100%',
+    })
+    .deleteRange({ from: props.getPos(), to: props.getPos() })
+    .run()
+  isPopoverOpen.value = false
+}
+function handleDelete() {
+  props.deleteNode()
+}
+function handleClick() {
+  fileInput.value?.click()
+}
+
+// 这里的渲染数组是计算出来的
+const componentSlot = computed(() => {
+  const cb = props.extension && props.extension.options && props.extension.options.componentSlot
+  if (typeof cb === 'function') {
+    return cb({
+      editor: props.editor,
+      extension: props.extension,
+      t: t,
+    })
+  }
+  return cb ? cb : null
+})
+</script>
+
+<template>
+  <NodeViewWrapper
+    as="div"
+    data-drag-handle
+  >
+    <Popover
+      :open="isPopoverOpen"
+      :closeOnClickOutside="false"
+    >
+      <PopoverTrigger as-child>
+        <div class="flex items-center w-full p-3 my-3 hover:bg-accent border border-border text-muted-foreground cursor-pointer rounded-sm transition-all">
+          <div
+            class="flex justify-center items-center gap-3 text-s"
+            v-if="loading"
+          >
+            <Icon
+              class="animate-spin w-6 h-6"
+              name="LoaderCircle"
+            />
+            <span>{{ t('editor.video.dialog.uploading') }}...</span>
+          </div>
+          <div
+            v-else
+            class="flex justify-between items-center w-full"
+          >
+            <div class="flex justify-center items-center gap-3">
+              <Icon
+                name="Video"
+                class="w-6 h-6"
+              />
+              <span class="text-sm">{{ t('editor.video.dialog.title') }}</span>
+            </div>
+            <Icon
+              name="Trash2"
+              class="hover:text-foreground"
+              @click.stop="handleDelete"
+            />
+          </div>
+        </div>
+      </PopoverTrigger>
+      <PopoverContent
+        trapFocus
+        class="w-full"
+        tabindex="0"
+        :onOpenAutoFocus="e => e.preventDefault()"
+      >
+        <component
+          v-if="componentSlot && componentSlot.component"
+          :is="componentSlot.component"
+          v-bind="{
+                ...componentSlot.componentProps,
+                editor: componentSlot.componentProps?.editor ?? props.editor
+              }"
+        />
+        <component
+          v-else-if="componentSlot"
+          :is="componentSlot"
+          :editor="props.editor"
+        />
+        <Tabs
+          default-value="upload"
+          class="w-[400px]"
+          activationMode="manual"
+        >
+          <TabsList class="grid w-full grid-cols-2">
+            <TabsTrigger value="upload">{{ t('editor.video.dialog.tab.upload') }} </TabsTrigger>
+            <TabsTrigger value="link"> {{ t('editor.video.dialog.link') }} </TabsTrigger>
+          </TabsList>
+          <TabsContent value="upload">
+            <Button
+              class="w-full mt-1"
+              size="sm"
+              @click="handleClick"
+            >{{
+              t('editor.video.dialog.tab.upload')
+            }}</Button>
+            <input
+              type="file"
+              accept="video/*"
+              ref="fileInput"
+              style="display: none"
+              @change="handleFile"
+            />
+          </TabsContent>
+          <TabsContent value="link">
+            <form @submit.prevent="handleLink">
+              <div class="flex items-center gap-2">
+                <Input
+                  type="url"
+                  autofocus
+                  required
+                  v-model="link"
+                  :placeholder="t('editor.video.dialog.placeholder')"
+                />
+                <Button type="submit">{{ t('editor.video.dialog.button.apply') }}</Button>
+              </div>
+            </form>
+          </TabsContent>
+        </Tabs>
+      </PopoverContent>
+    </Popover>
+  </NodeViewWrapper>
+</template>

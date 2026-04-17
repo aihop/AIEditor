@@ -1,0 +1,198 @@
+.ft-editor {
+  @apply rounded-[0.5rem] bg-background shadow outline outline-1 relative outline-border;
+  --ft-outline-color: theme('colors.blue.500');
+  &.ft-editor-focus {
+    outline-color: var(--ft-outline-color);
+  }
+
+  .tiptap {
+    @apply caret-black dark:caret-white outline-0 px-4 py-2 sm:px-20 sm:py-6;
+    min-height: 180px;
+    .img-placeholder {
+      width: fit-content;
+      position: relative;
+      @apply backdrop-blur-sm bg-white/30;
+
+      &:before {
+        content: '';
+        box-sizing: border-box;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 24px;
+        height: 24px;
+        margin: -12px 0 0 -12px;
+        @apply animate-spin border-current border-t-transparent rounded-full border-[3px] inline-block;
+      }
+    }
+    .highlight-paragraph {
+      @apply bg-black/10 dark:bg-white/20;
+    }
+
+    /* Table */
+    .tableWrapper {
+      @apply overflow-x-auto;
+
+      table {
+        overflow: hidden;
+        display: table;
+
+        .column-resize-handle {
+          @apply -bottom-[2px] absolute -right-1 top-0 w-1 z-10 pointer-events-none bg-primary;
+        }
+        .resize-cursor {
+          cursor: 'col-resize';
+        }
+
+        .selectedCell {
+          @apply bg-black/5 border-black/20 border-double;
+          @apply dark:bg-white/10 dark:border-white/20;
+        }
+      }
+    }
+    /* Column */
+    & > *:first-child,
+    [data-type='column'] > * {
+      @apply first:mt-0 last:mb-0;
+    }
+    [data-type='columns'] {
+      &.focus [data-type='column'],
+      &:hover [data-type='column'] {
+        @apply bg-accent;
+      }
+
+      [data-type='column'].focus {
+        @apply bg-accent;
+      }
+    }
+    [data-type='columns']::before,
+    [data-type='columns']::after {
+      content: none !important;
+    }
+
+    [data-type='column'] {
+      @apply rounded border border-solid border-transparent p-1;
+      transition: border 160ms cubic-bezier(0.45, 0.05, 0.55, 0.95);
+
+      &:hover {
+        @apply border-gray-50 dark:border-gray-900;
+      }
+
+      &:has(.is-active),
+      &.focus {
+        @apply border-neutral-100 dark:border-neutral-900;
+      }
+    }
+    [data-type='horizontalRule'] {
+      @apply transition-all duration-100 ease-in-out cursor-pointer;
+
+      &.ProseMirror-selectednode {
+        @apply bg-black/5 dark:bg-white/10;
+
+        hr {
+          @apply border-t-black/30 dark:border-t-white/30;
+        }
+      }
+
+      &:hover:not(&.ProseMirror-selectednode) {
+        @apply bg-black/5;
+        @apply dark:bg-white/10;
+      }
+    }
+    :not(.dragging) .ProseMirror-selectednode {
+      @apply outline-none  bg-black/10 dark:bg-white/20 shadow-none transition-colors;
+    }
+
+    .selection {
+      @apply inline;
+    }
+
+    .selection,
+    *::selection {
+      @apply bg-black/10 dark:bg-white/20;
+    }
+
+    .is-empty::before {
+      content: attr(data-placeholder);
+      float: left;
+      color: #adb5bd;
+      pointer-events: none;
+      width: 100%;
+      height: 0;
+    }
+    .is-editor-empty:first-child::before {
+      content: attr(data-placeholder);
+      float: left;
+      color: #adb5bd;
+      pointer-events: none;
+      width: 100%;
+      height: 0;
+    }
+    p.is-editor-empty:first-child::before {
+      float: left;
+      height: 0;
+      color: #adb5bd;
+      pointer-events: none;
+      width: 100%;
+      content: attr(data-placeholder);
+    }
+    .ProseMirror-gapcursor {
+      @apply relative w-full max-w-2xl mx-auto;
+
+      &:after {
+        @apply border-t-black/40 dark:border-t-white/40 w-full -top-[1.5em] max-w-2xl mx-auto left-0 right-0;
+      }
+    }
+
+    .iframe-wrapper {
+      &.focus {
+        > div {
+          @apply outline-primary outline-4 outline;
+        }
+      }
+    }
+  }
+  /*  */
+  .ft-editor-search-result {
+    @apply bg-yellow-300;
+  }
+  .ft-editor-search-result-current {
+    @apply bg-red-400;
+  }
+}
+
+.heading-0 {
+  font-weight: 700;
+  font-size: 16px;
+}
+.heading-1 {
+  font-weight: 700;
+  font-size: 28px;
+  line-height: 1.6;
+}
+.heading-2 {
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 1.6;
+}
+.heading-3 {
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.6;
+}
+.heading-4 {
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.6;
+}
+.heading-5 {
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.6;
+}
+.heading-6 {
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.6;
+}
+
