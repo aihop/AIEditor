@@ -3,7 +3,7 @@ import { saveAs } from 'file-saver'
 import ActionButton from './components/ActionButton.vue'
 import { DocxSerializer, defaultNodes, defaultMarks } from 'prosemirror-docx'
 import { Packer } from 'docx'
-import type { GeneralOptions } from 'ft-editor'
+import type { GeneralOptions } from 'ai-editor'
 
 declare module '@tiptap/core' {
   interface Commands<ReturnType> {

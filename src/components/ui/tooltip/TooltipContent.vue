@@ -29,7 +29,7 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits)
 </script>
 
 <template>
-  <TooltipPortal to=".ft-editor">
+  <TooltipPortal to=".ai-editor">
     <TooltipContent
       v-bind="{ ...forwarded, ...$attrs }"
       :class="

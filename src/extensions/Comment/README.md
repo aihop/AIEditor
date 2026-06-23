@@ -21,14 +21,14 @@ Comment 扩展为 Ft Editor 提供了类似 Google Docs 的评论功能，允许
 
 ```typescript
 import { Editor } from '@tiptap/vue-3'
-import { Comment } from 'ft-editor'
+import { Comment } from 'ai-editor'
 
 const editor = new Editor({
   extensions: [
     // ... 其他扩展
     Comment.configure({
       HTMLAttributes: {
-        class: 'ft-comment',
+        class: 'ai-comment',
       },
       onCommentActivated: commentId => {
         console.log('激活的评论 ID:', commentId)
@@ -106,9 +106,9 @@ editor.commands.toggleComment('comment-123')
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useEditor, EditorContent } from '@tiptap/vue-3'
-import { BaseKit, Comment } from 'ft-editor'
-import type { CommentData } from 'ft-editor'
-import 'ft-editor/style.css'
+import { BaseKit, Comment } from 'ai-editor'
+import type { CommentData } from 'ai-editor'
+import 'ai-editor/style.css'
 
 // 评论列表
 const comments = ref<CommentData[]>([])
@@ -208,9 +208,9 @@ function scrollToComment(commentId: string) {
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useEditor, EditorContent } from '@tiptap/vue-3'
-import { BaseKit, Comment } from 'ft-editor'
-import type { CommentData } from 'ft-editor'
-import 'ft-editor/style.css'
+import { BaseKit, Comment } from 'ai-editor'
+import type { CommentData } from 'ai-editor'
+import 'ai-editor/style.css'
 
 // 当前章节ID（从路由或props获取）
 const chapterId = ref('chapter-123')
@@ -281,10 +281,10 @@ const editor = useEditor({
 
 ## 🎨 样式自定义
 
-Comment 扩展使用 `ft-comment` 类名，默认样式包括：
+Comment 扩展使用 `ai-comment` 类名，默认样式包括：
 
 ```css
-.ft-comment {
+.ai-comment {
   /* 浅色模式 */
   background-color: rgb(254 249 195); /* yellow-100 */
 
@@ -528,7 +528,7 @@ Comment.configure({
     activeCommentId.value = commentId
 
     // 更新 DOM 属性
-    document.querySelectorAll('.ft-comment').forEach(el => {
+    document.querySelectorAll('.ai-comment').forEach(el => {
       el.removeAttribute('data-comment-active')
     })
 

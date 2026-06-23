@@ -53,7 +53,7 @@
           <nav class="flex items-center gap-0.5">
             <a
               class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 hover:bg-accent hover:text-accent-foreground w-8 h-8"
-              href="https://github.com/platship/ft-editor"
+              href="https://github.com/platship/ai-editor"
               target="_blank"
             ><svg
                 viewBox="0 0 15 15"
@@ -114,7 +114,7 @@
         </button>
       </div>
       <div class="rounded-lg border bg-card text-card-foreground shadow-sm">
-        <ft-editor
+        <ai-editor
           v-model="content"
           :extensions="extensions"
           :hideToolbar="hideToolbar"
@@ -127,7 +127,7 @@
           :custom-fullscreen="true"
           @fullscreenChange="handleFullscreenChange"
         >
-        </ft-editor>
+        </ai-editor>
       </div>
       <div class="mt-6 rounded-lg border bg-muted p-4">
         <h3 class="mb-2 text-sm font-medium">HTML Output</h3>
@@ -181,17 +181,17 @@ import {
   Preview,
   Printer,
   Iframe,
-  FtEditor,
+  AiEditor,
   ThemeToggle,
   SpecialCharacter,
   SourceCode,
-} from 'ft-editor'
+} from 'ai-editor'
 import { ExportWord } from './extensions/ExportWord'
 // import OpenAI from 'openai'
 import { DEMO_CONTENT } from './initContent'
 
 import './style.css'
-import 'ft-editor/style.css'
+import 'ai-editor/style.css'
 
 const content = ref(DEMO_CONTENT)
 const theme = ref<string | null>(null)

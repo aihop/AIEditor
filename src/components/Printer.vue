@@ -60,7 +60,7 @@ function generatePrintHTML(content: string): string {
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <style>${getStylesHtml()}</style>
     </head>
-    <body class="ft-editor">
+    <body class="ai-editor">
       <div class="tiptap FtContentView" translate="no" aria-expanded="false">
           ${content}
       </div>

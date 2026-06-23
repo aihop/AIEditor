@@ -1,4 +1,4 @@
-# AI Editor (FtEditor)
+# AiEditor
 
 A modern AI-powered and highly customized rich-text editor for Vue 3, based on [tiptap](https://tiptap.dev) and [shadcn-vue](https://www.shadcn-vue.com/).
 
@@ -61,7 +61,7 @@ const extensions = [
 </script>
 
 <template>
-  <ft-editor v-model="content" :extensions="extensions" />
+  <ai-editor v-model="content" :extensions="extensions" />
 </template>
 ```
 
@@ -70,7 +70,7 @@ const extensions = [
 ```vue
 <script setup lang="ts">
 import { ref } from 'vue'
-import { FtEditor, BaseKit } from 'ai-editor'
+import { AiEditor, BaseKit } from 'ai-editor'
 import 'ai-editor/style.css'
 
 const content = ref('')
@@ -78,7 +78,7 @@ const extensions = [BaseKit.configure()]
 </script>
 
 <template>
-  <FtEditor v-model="content" :extensions="extensions" />
+  <AiEditor v-model="content" :extensions="extensions" />
 </template>
 ```
 
@@ -178,7 +178,7 @@ locale.setLang('en') // 'en' | 'zhHans'
 
 ## Theme
 
-- Use `theme`, `dark`, `radius` props on `<ft-editor />`
+- Use `theme`, `dark`, `radius` props on `<ai-editor />`
 - Or use built-in components: `ThemeToggle`, `ThemePicker`
 
 ## Development

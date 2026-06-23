@@ -303,7 +303,7 @@ const inputPaddingClass = computed(() => (selectedLabel.value ? 'pl-24' : 'pl-10
       :update-delay="0"
       v-show="shouldShow"
       :editor="editor"
-      class="ft-editor"
+      class="ai-editor"
       style="box-shadow:none; outline-style:none;"
       :tippy-options="tippyOptions"
     >
@@ -342,7 +342,7 @@ const inputPaddingClass = computed(() => (selectedLabel.value ? 'pl-24' : 'pl-10
             <Icon
               name="LoaderCircle"
               class="animate-spin w-4 h-4 mr-2 text-primary"
-              style="vertical-align: middle; color: var(--ft-primary-color);"
+              style="vertical-align: middle; color: var(--ai-primary-color);"
             />
             {{ t('editor.AI.generating') }}
           </div>

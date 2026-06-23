@@ -1,4 +1,4 @@
-# AI Editor（FtEditor）
+# AiEditor
 
 一个面向 Vue 3 的现代化 AI 富文本编辑器，基于 [tiptap](https://tiptap.dev) 与 [shadcn-vue](https://www.shadcn-vue.com/) 构建，强调“高可定制 + 组件化 + 扩展驱动”。
 
@@ -61,7 +61,7 @@ const extensions = [
 </script>
 
 <template>
-  <ft-editor v-model="content" :extensions="extensions" />
+  <ai-editor v-model="content" :extensions="extensions" />
 </template>
 ```
 
@@ -70,7 +70,7 @@ const extensions = [
 ```vue
 <script setup lang="ts">
 import { ref } from 'vue'
-import { FtEditor, BaseKit } from 'ai-editor'
+import { AiEditor, BaseKit } from 'ai-editor'
 import 'ai-editor/style.css'
 
 const content = ref('')
@@ -78,7 +78,7 @@ const extensions = [BaseKit.configure()]
 </script>
 
 <template>
-  <FtEditor v-model="content" :extensions="extensions" />
+  <AiEditor v-model="content" :extensions="extensions" />
 </template>
 ```
 
@@ -178,7 +178,7 @@ locale.setLang('zhHans') // 'en' | 'zhHans'
 
 ## 主题
 
-- 通过 `<ft-editor />` 的 `theme` / `dark` / `radius` 控制主题
+- 通过 `<ai-editor />` 的 `theme` / `dark` / `radius` 控制主题
 - 或使用内置组件：`ThemeToggle`、`ThemePicker`
 
 ## 开发

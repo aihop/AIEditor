@@ -1,12 +1,12 @@
 <template>
-  <node-view-wrapper :id="node.attrs.id" class="ft-node-view my-4">
+  <node-view-wrapper :id="node.attrs.id" class="ai-node-view my-4">
     <div
       ref="containerRef"
       :class="`relative ${isDark ? 'atom-one-dark' : 'vs-code-light'} w-full overflow-hidden rounded-sm outline-1 outline-solid outline-border outline`"
     >
       <div
         v-if="editor.isEditable"
-        class="ft-code-block-toolbar bg-background text-foreground flex items-center justify-between z-10 p-1 border-b"
+        class="ai-code-block-toolbar bg-background text-foreground flex items-center justify-between z-10 p-1 border-b"
       >
         <div class="flex items-center gap-2">
           <TooltipProvider :delay-duration="0">

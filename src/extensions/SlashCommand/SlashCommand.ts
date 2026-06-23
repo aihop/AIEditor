@@ -36,7 +36,7 @@ export const SlashCommand = Extension.create<SlashCommandOptions>({
         ],
       },
       onCreate(instance) {
-        instance.popper.classList.add('ft-editor')
+        instance.popper.classList.add('ai-editor')
       },
     })
   },

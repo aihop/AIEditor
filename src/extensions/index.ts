@@ -117,6 +117,9 @@ export { Emoji } from './Emoji'
 export type { SourceCodeOptions } from './SourceCode'
 export { SourceCode } from './SourceCode'
 
+export type { MarkdownModeOptions } from './MarkdownMode'
+export { MarkdownMode } from './MarkdownMode'
+
 export { FindAndReplace } from './FindAndReplace'
 
 export { Printer } from './Printer'

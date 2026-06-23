@@ -245,6 +245,8 @@ const locale: Record<string, string> = {
   'editor.sourceCode.tooltip': '源代码',
   'editor.sourceCode.title': '源代码',
   'editor.sourceCode.format': '格式化',
+  'editor.markdownMode.tooltip': 'Markdown',
+  'editor.markdownMode.title': 'Markdown',
   'editor.iframe.tooltip': '嵌入服务',
   'editor.comment.tooltip': '添加评论',
   'editor.comment.add': '添加评论',

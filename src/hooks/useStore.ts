@@ -55,6 +55,9 @@ interface Instance {
   /** SourceCode */
   sourceCode: boolean
 
+  /** Markdown mode */
+  markdownMode: boolean
+
   /** FindAndReplace */
   findAndReplace: boolean
   /** Printer */
@@ -76,6 +79,7 @@ export const useTiptapStore = createGlobalState(() => {
     AIMenuShortcut:true,
     CommentMenu: false,
     sourceCode: false,
+    markdownMode: false,
     showPreview: false,
     spellCheck: false,
     findAndReplace: false,
@@ -94,6 +98,9 @@ export const useTiptapStore = createGlobalState(() => {
   }
   function toggleSourceCode() {
     state.sourceCode = !state.sourceCode
+  }
+  function toggleMarkdownMode() {
+    state.markdownMode = !state.markdownMode
   }
   function toggleSpellCheck() {
     state.spellCheck = !state.spellCheck
@@ -122,6 +129,7 @@ export const useTiptapStore = createGlobalState(() => {
     toggleFindAndReplace,
     togglePrinter,
     toggleSourceCode,
+    toggleMarkdownMode,
     setDisabled,
   }
 })

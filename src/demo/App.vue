@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen bg-background ft-editor">
+  <div class="min-h-screen bg-background ai-editor">
     <main class="my-0 mx-auto max-w-[1024px] p-6">
       <div class="mb-2">
         <button
@@ -33,7 +33,7 @@
           {{ minimal ? 'Full' : 'Minimal' }}
         </button>
       </div>
-      <FtEditor
+      <AiEditor
         ref="editor"
         key="minimal"
         :hideMenubar="true"
@@ -44,10 +44,10 @@
         :custom-fullscreen="true"
         @fullscreenChange="handleFullscreenChange"
         :showFocusClass="false"
-        :style="{ '--ft-outline-color': outlineColor, '--ft-primary-color': outlineColor, 'border-radius': '0.1rem' }"
+        :style="{ '--ai-outline-color': outlineColor, '--ai-primary-color': outlineColor, 'border-radius': '0.1rem' }"
       />
       <div class="rounded-lg border bg-card text-card-foreground shadow-sm">
-        <FtEditor
+        <AiEditor
           ref="editor"
           :key="minimal ? 'minimal' : 'full'"
           :hideMenubar="hideMenubar || minimal"
@@ -59,7 +59,7 @@
           :custom-fullscreen="true"
           @fullscreenChange="handleFullscreenChange"
           :showFocusClass="false"
-          :style="{ '--ft-outline-color': outlineColor, '--ft-primary-color': outlineColor, 'border-radius': '0.1rem' }"
+          :style="{ '--ai-outline-color': outlineColor, '--ai-primary-color': outlineColor, 'border-radius': '0.1rem' }"
         />
       </div>
     </main>
@@ -109,7 +109,7 @@ import {
   Preview,
   SpecialCharacter,
   Emoji,
-  FtEditor,
+  AiEditor,
   Printer,
   Iframe,
   Extension,

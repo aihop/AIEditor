@@ -7,6 +7,7 @@ import { Editor, EditorContent } from '@tiptap/vue-3'
 import type { EditorOptions } from '@tiptap/vue-3'
 import { EDITOR_UPDATE_THROTTLE_WAIT_TIME } from '@/constants'
 import { differenceBy, getCssUnitWithDefault, hasExtension, isEqual, throttle } from '@/utils/utils'
+import { isLikelyMarkdown, markdownToHtml } from '@/utils'
 import { useLocale } from '@/locales'
 import { useTiptapStore } from '@/hooks'
 import { useTheme } from '@/hooks/useTheme'
@@ -22,18 +23,20 @@ import Menubars from './Menubars.vue'
 import Toolbar from './Toolbar.vue'
 import Preview from './Preview.vue'
 import Printer from './Printer.vue'
+import MarkdownMode from './MarkdownMode.vue'
 import SourceCode from './SourceCode.vue'
 
 import FindAndReplace from './FindAndReplace.vue'
-import type { FtEditorProps, FtEditorEmits } from '@/type'
+import type { AiEditorProps, AiEditorEmits } from '@/type'
 import { useDark } from '@vueuse/core'
 import Toaster from '@/components/ui/toast/Toaster.vue'
 import { useEditorFocus } from '@/hooks/useEditorFocus'
 
 type KeyDownHandler = NonNullable<EditorOptions['editorProps']['handleKeyDown']>
+type PasteHandler = NonNullable<EditorOptions['editorProps']['handlePaste']>
 type UpdateHandler = NonNullable<EditorOptions['onUpdate']>
 
-const props = withDefaults(defineProps<FtEditorProps>(), {
+const props = withDefaults(defineProps<AiEditorProps>(), {
   modelValue: '',
   output: 'html',
   dark: undefined,
@@ -53,7 +56,7 @@ const props = withDefaults(defineProps<FtEditorProps>(), {
   customFullscreen: false,
 })
 
-const emit = defineEmits<FtEditorEmits>()
+const emit = defineEmits<AiEditorEmits>()
 
 const attrs = useAttrs()
 const { state, isFullscreen, setDisabled } = useTiptapStore()
@@ -80,6 +83,25 @@ const editorConfig = computed<Partial<EditorOptions>>(() => ({
       }
       return false
     }, EDITOR_UPDATE_THROTTLE_WAIT_TIME),
+    handlePaste: ((view, event) => {
+      if (!event.clipboardData || !editor.isEditable) {
+        return false
+      }
+
+      const items = Array.from(event.clipboardData.items || [])
+      if (items.some(item => item.kind === 'file') || items.some(item => item.type === 'text/html')) {
+        return false
+      }
+
+      const text = event.clipboardData.getData('text/plain')
+      if (!text || !isLikelyMarkdown(text)) {
+        return false
+      }
+
+      event.preventDefault()
+      editor.chain().focus().insertContent(markdownToHtml(text)).run()
+      return true
+    }) as PasteHandler,
     attributes: {
       class: 'FtContentView',
     },
@@ -149,7 +171,7 @@ const contentDynamicStyles = computed(() => ({
   margin: props.maxWidth ? '8px auto' : undefined,
 }))
 
-function getOutput(editor: CoreEditor, output: FtEditorProps['output']): string | JSONContent {
+function getOutput(editor: CoreEditor, output: AiEditorProps['output']): string | JSONContent {
   if (props.removeDefaultWrapper) {
     if (editor.isEmpty) {
       return output === 'json' ? {} : ''
@@ -203,13 +225,8 @@ defineExpose({ editor })
 <template>
   <div
     v-if="editor"
-    class="ft-editor"
-    :class="[
-      editorClass,
-      {
-        'ft-editor-focus': isFocused,
-      },
-    ]"
+    class="ai-editor"
+    :class="editorClass"
   >
     <Preview
       v-if="hasExtension(editor, 'preview')"
@@ -221,6 +238,10 @@ defineExpose({ editor })
     />
     <SourceCode
       v-if="hasExtension(editor, 'sourceCode')"
+      :editor="editor"
+    />
+    <MarkdownMode
+      v-if="hasExtension(editor, 'markdownMode')"
       :editor="editor"
     />
     <Printer
@@ -244,7 +265,12 @@ defineExpose({ editor })
         :disabled="disabled"
         class="border-b py-1 px-1 overflow-hidden"
       />
-      <div class="overflow-hidden relative flex-1">
+      <div
+        class="ai-editor-content-wrap overflow-hidden relative flex flex-col flex-1 min-h-0"
+        :class="{
+          'ai-editor-content-focus': isFocused,
+        }"
+      >
         <FindAndReplace
           v-if="hasExtension(editor, 'findAndReplace')"
           :container-ref="contentRef"

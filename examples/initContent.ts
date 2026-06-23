@@ -235,7 +235,7 @@ export const DEMO_CONTENT = {
       type: 'codeBlock',
       attrs: { language: 'bash' },
       content: [
-        { type: 'text', text: 'pnpm add ft-editor\n// or\nor yarn add ft-editor\n// or\nor npm i ft-editor -S' },
+        { type: 'text', text: 'pnpm add ai-editor\n// or\nor yarn add ai-editor\n// or\nor npm i ai-editor -S' },
       ],
     },
     {
@@ -249,7 +249,7 @@ export const DEMO_CONTENT = {
       content: [
         {
           type: 'text',
-          text: "import { createApp } from 'vue'\nimport App from './App.vue'\nimport FtEditor from 'ft-editor'\nimport 'ft-editor/style.css'\nconst app = createApp(App)\napp.use(FtEditor)\napp.mount('#app')",
+          text: "import { createApp } from 'vue'\nimport App from './App.vue'\nimport AiEditor from 'ai-editor'\nimport 'ai-editor/style.css'\nconst app = createApp(App)\napp.use(AiEditor)\napp.mount('#app')",
         },
       ],
     },

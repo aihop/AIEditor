@@ -30,7 +30,7 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits)
 </script>
 
 <template>
-  <SelectPortal to=".ft-editor">
+  <SelectPortal to=".ai-editor">
     <SelectContent
       v-bind="{ ...forwarded, ...$attrs }"
       :class="

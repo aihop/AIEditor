@@ -54,7 +54,7 @@ export const Comment = Mark.create<CommentOptions>({
     return {
       ...this.parent?.(),
       HTMLAttributes: {
-        class: 'ft-comment',
+        class: 'ai-comment',
       },
       onCommentActivated: undefined,
       onCommentCreate: undefined,
@@ -112,7 +112,7 @@ export const Comment = Mark.create<CommentOptions>({
     return [
       'span',
       mergeAttributes(this.options.HTMLAttributes, HTMLAttributes, {
-        class: 'ft-comment',
+        class: 'ai-comment',
       }),
       0,
     ]

@@ -6,7 +6,7 @@
   * {
     @apply border-border;
   }
-  .ft-editor {
+  .ai-editor {
     @apply bg-background text-foreground;
   }
 }

@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { ActionButton } from 'ft-editor'
-import type { Editor } from 'ft-editor'
-import { ButtonViewReturnComponentProps } from 'ft-editor'
+import { ActionButton } from 'ai-editor'
+import type { Editor } from 'ai-editor'
+import { ButtonViewReturnComponentProps } from 'ai-editor'
 import iconUrl from '../../../icons/exportWord.svg'
 
 const props = withDefaults(defineProps<Props>(), {

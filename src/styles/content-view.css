@@ -240,7 +240,7 @@
   }
 
   /* Comment styles - 评论样式 */
-  .ft-comment {
+  .ai-comment {
     @apply bg-yellow-100 dark:bg-yellow-900/30 px-0.5 rounded cursor-pointer transition-colors;
     
     &:hover {

@@ -20,10 +20,10 @@ function cssNamespacePlugin(): Plugin {
           const css = chunk.source as string
           const result = await postcss([
             prefixer({
-              prefix: '.ft-editor',
+              prefix: '.ai-editor',
               transform(prefix, selector, prefixedSelector) {
                 if (
-                  selector.startsWith('.ft-editor') ||
+                  selector.startsWith('.ai-editor') ||
                   selector.startsWith('.FtContentView')
                 ) {
                   return selector;
@@ -45,7 +45,7 @@ export default defineConfig({
     vue(),
     dts({
       insertTypesEntry: true,
-      outDir: '../lib/ft-editor/',
+      outDir: '../lib/ai-editor/',
       exclude: ['src/demo/**/*', 'examples/**/*']
     }),
     cssNamespacePlugin(),
@@ -69,11 +69,11 @@ export default defineConfig({
     },
   },
   build: {
-    outDir: '../lib/ft-editor/',
+    outDir: '../lib/ai-editor/',
     lib: {
       entry: path.resolve(__dirname, 'src/index.ts'),
-      name: 'FtEditor',
-      fileName: (format) => `ft-editor.${format}.js`,
+      name: 'AiEditor',
+      fileName: (format) => `ai-editor.${format}.js`,
     },
     cssCodeSplit: false,
     rollupOptions: {

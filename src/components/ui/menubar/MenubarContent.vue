@@ -19,7 +19,7 @@ const forwardedProps = useForwardProps(delegatedProps)
 </script>
 
 <template>
-  <MenubarPortal to=".ft-editor">
+  <MenubarPortal to=".ai-editor">
     <MenubarContent
       v-bind="forwardedProps"
       :class="

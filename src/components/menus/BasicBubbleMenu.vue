@@ -68,7 +68,7 @@ const items = computed(() => {
     v-show="items.length && !store?.state.AIMenu"
     :editor="editor"
     :tippy-options="tippyOptions"
-    class="ft-editor"
+    class="ai-editor"
     style="box-shadow:none; outline-style:none;"
   >
     <div class="border px-3 py-2 transition-all select-none pointer-events-auto shadow-sm rounded-sm bg-background w-auto max-w-[calc(-68px_+_100vw)] overflow-x-auto">

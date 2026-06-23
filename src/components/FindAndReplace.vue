@@ -134,7 +134,7 @@ props.editor.on('blur', () => {
 <template>
   <div
     v-if="store.state.findAndReplace"
-    class="findAndReplaceDialog ft-editor absolute bg-white shadow-lg rounded-lg p-4 w-[320px] border z-[11]"
+    class="findAndReplaceDialog ai-editor absolute bg-white shadow-lg rounded-lg p-4 w-[320px] border z-[11]"
     style="right: 12px; top: 12px"
   >
     <button

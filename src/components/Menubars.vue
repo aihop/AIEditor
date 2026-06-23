@@ -18,9 +18,10 @@ import type { Editor } from '@tiptap/core'
 import { Icon, icons } from '@/components/icons'
 import { getShortcutKeys } from '@/utils/plateform'
 import { getSelectionText } from '@/utils/content'
+import { isLikelyMarkdown, markdownToHtml } from '@/utils'
 import { useTiptapStore } from '@/hooks'
 import TableGrid from '@/components/TableGrid.vue'
-const DRAFT_KEY = 'ft-editor-draft' // 本地存储的 key
+const DRAFT_KEY = 'ai-editor-draft' // 本地存储的 key
 
 interface Props {
   editor: Editor
@@ -249,7 +250,8 @@ const menubarMenus = ref<MenuGroup[]>([
             if (htmlContent) {
               props.editor.chain().insertContent(htmlContent).focus().run()
             } else if (textContent) {
-              props.editor.chain().insertContent(textContent).focus().run()
+              const content = isLikelyMarkdown(textContent) ? markdownToHtml(textContent) : textContent
+              props.editor.chain().insertContent(content).focus().run()
             }
           } catch (err) {
             console.error('读取剪贴板内容时出错: ', err)
@@ -301,6 +303,14 @@ const menubarMenus = ref<MenuGroup[]>([
           props.editor?.chain().toggleSourceCode().focus().run()
         },
         requiredExtensions: ['sourceCode'],
+      },
+      {
+        title: 'editor.markdownMode.tooltip',
+        icon: 'File',
+        action: () => {
+          props.editor?.chain().toggleMarkdownMode().focus().run()
+        },
+        requiredExtensions: ['markdownMode'],
       },
       {
         title: 'editor.fullscreen.tooltip.fullscreen',

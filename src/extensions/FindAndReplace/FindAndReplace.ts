@@ -221,7 +221,7 @@ export const FindAndReplace = Extension.create<FindAndReplaceOptions, FindAndRep
   addOptions() {
     return {
       ...this.parent?.(),
-      searchResultClass: 'ft-editor-search-result',
+      searchResultClass: 'ai-editor-search-result',
       disableRegex: true,
       button: ({ editor, extension, t }) => ({
         component: ActionButton,

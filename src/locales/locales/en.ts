@@ -244,6 +244,8 @@ const locale: Record<string, string> = {
   'editor.sourceCode.tooltip': 'Source Code',
   'editor.sourceCode.title': 'Source Code',
   'editor.sourceCode.format': 'Format',
+  'editor.markdownMode.tooltip': 'Markdown',
+  'editor.markdownMode.title': 'Markdown',
   'editor.iframe.tooltip': 'Embed Service',
   'editor.comment.tooltip': 'Add Comment',
   'editor.comment.add': 'Add Comment',

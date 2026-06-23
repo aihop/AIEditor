@@ -29,7 +29,7 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits)
 </script>
 
 <template>
-  <PopoverPortal to=".ft-editor">
+  <PopoverPortal to=".ai-editor">
     <PopoverContent
       v-bind="{ ...forwarded, ...$attrs }"
       :class="

@@ -6,8 +6,8 @@ import type { Theme, BorderRadius } from '@/constants/index'
 
 export function useTheme() {
   // 使用本地存储持久化主题设置
-  const storedTheme = useLocalStorage<Theme>('ft-editor-theme-color', DEFAULT_THEME)
-  const storedBorderRadius = useLocalStorage<BorderRadius>('ft-editor-border-radius', DEFAULT_BORDER_RADIUS)
+  const storedTheme = useLocalStorage<Theme>('ai-editor-theme-color', DEFAULT_THEME)
+  const storedBorderRadius = useLocalStorage<BorderRadius>('ai-editor-border-radius', DEFAULT_BORDER_RADIUS)
 
   // 创建响应式的主题状态，与本地存储同步
   const theme = ref<Theme>(storedTheme.value)
@@ -38,16 +38,16 @@ export function useTheme() {
     const colorScheme = isDarkMode ? colorConfig.cssVars.dark : colorConfig.cssVars.light
 
     // 创建或获取主题样式元素
-    let themeStyleElement = document.getElementById('ft-editor-theme-styles')
+    let themeStyleElement = document.getElementById('ai-editor-theme-styles')
     if (!themeStyleElement) {
       themeStyleElement = document.createElement('style')
-      themeStyleElement.id = 'ft-editor-theme-styles'
+      themeStyleElement.id = 'ai-editor-theme-styles'
       document.head.appendChild(themeStyleElement)
     }
 
-    // 生成CSS规则，只对ft-editor相关的元素生效
+    // 生成CSS规则，只对ai-editor相关的元素生效
     const cssRules = Object.entries(colorScheme)
-      .map(([key, value]) => `.ft-editor, .ft-editor * { --${key}: ${value}; }`)
+      .map(([key, value]) => `.ai-editor, .ai-editor * { --${key}: ${value}; }`)
       .join('\n')
 
     // 应用主题样式
@@ -70,7 +70,7 @@ export function useTheme() {
   // 监听系统主题变化
   systemTheme.addEventListener('change', (e) => {
     // 如果当前没有手动设置主题，则跟随系统主题
-    if (!localStorage.getItem('ft-editor-dark-mode')) {
+    if (!localStorage.getItem('ai-editor-dark-mode')) {
       isDark.value = e.matches
     }
   })

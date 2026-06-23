@@ -119,8 +119,10 @@
     "clsx": "^2.1.1",
     "hotkeys-js": "^3.13.7",
     "lucide-vue-next": "^0.477.0",
+    "marked": "^15.0.0",
     "reka-ui": "^2.0.2",
-    "tippy.js": "^6.3.7"
+    "tippy.js": "^6.3.7",
+    "turndown": "^7.2.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.3.0",

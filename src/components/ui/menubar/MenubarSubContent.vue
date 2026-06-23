@@ -23,7 +23,7 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits)
 </script>
 
 <template>
-  <MenubarPortal to=".ft-editor">
+  <MenubarPortal to=".ai-editor">
     <MenubarSubContent
       v-bind="forwarded"
       :class="

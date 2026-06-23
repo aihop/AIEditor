@@ -5,9 +5,9 @@ import type { Theme, BorderRadius } from '@/constants'
 export type { Editor, JSONContent } from '@tiptap/core'
 
 /**
- * Represents the onChange event for FtEditor.
+ * Represents the onChange event for AiEditor.
  */
-export type FtEditorOnChange = {
+export type AiEditorOnChange = {
   /** Editor object */
   editor: CoreEditor
   /** Output content, can be a string or JSON content */
@@ -38,6 +38,7 @@ export type ExtensionNameKeys =
   | 'horizontalRule'
   | 'code'
   | 'codeBlock'
+  | 'markdownMode'
   | 'clear'
   | 'history'
   | 'fullscreen'
@@ -111,7 +112,7 @@ export interface ButtonView<T = any> {
   (options: ButtonViewParams<T>): ButtonViewReturn | ButtonViewReturn[]
 }
 
-export interface FtEditorProps {
+export interface AiEditorProps {
   /**
    * Input value
    * Can be HTML string or JSON content
@@ -220,9 +221,9 @@ export interface FtEditorProps {
   customFullscreen?: boolean
 }
 
-export interface FtEditorEmits {
+export interface AiEditorEmits {
   (event: 'enter'): void
-  (event: 'change', value: FtEditorOnChange): void
+  (event: 'change', value: AiEditorOnChange): void
   (event: 'update:modelValue', value: string | JSONContent): void
   (event: 'fullscreenChange', isFullscreen: boolean): void
 }
