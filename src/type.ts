@@ -227,3 +227,7 @@ export interface AiEditorEmits {
   (event: 'update:modelValue', value: string | JSONContent): void
   (event: 'fullscreenChange', isFullscreen: boolean): void
 }
+
+export type AIEditorOnChange = AiEditorOnChange
+export type AIEditorProps = AiEditorProps
+export type AIEditorEmits = AiEditorEmits

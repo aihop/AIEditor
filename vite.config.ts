@@ -45,7 +45,7 @@ export default defineConfig({
     vue(),
     dts({
       insertTypesEntry: true,
-      outDir: '../lib/ai-editor/',
+      outDir: '../shoply/lib/ai-editor/',
       exclude: ['src/demo/**/*', 'examples/**/*']
     }),
     cssNamespacePlugin(),
@@ -69,7 +69,7 @@ export default defineConfig({
     },
   },
   build: {
-    outDir: '../lib/ai-editor/',
+    outDir: '../shoply/lib/ai-editor/',
     lib: {
       entry: path.resolve(__dirname, 'src/index.ts'),
       name: 'AiEditor',

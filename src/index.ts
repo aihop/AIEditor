@@ -16,12 +16,26 @@ export * from '@/extensions'
 export { useEditor } from '@tiptap/vue-3'
 export type * from '@/type'
 export { type Editor as EditorInstance, type JSONContent } from '@tiptap/core'
-export type { AiEditorProps, AiEditorEmits } from './type'
+export type {
+  AiEditorProps,
+  AiEditorEmits,
+  AIEditorProps,
+  AIEditorEmits,
+  AIEditorOnChange,
+} from './type'
 export type { Theme } from './constants'
 export { useTheme } from './hooks/useTheme'
 export { default as ThemeToggle } from './components/ThemeToggle.vue'
 export { default as ThemePicker } from './components/ThemePicker.vue'
 export { hasExtension } from './utils/utils'
-export { AiEditorPlugin, AiEditor, ActionButton, Extension, useTiptapStore }
+export {
+  AiEditorPlugin,
+  AiEditor,
+  AiEditor as AIEditor,
+  AiEditorPlugin as AIEditorPlugin,
+  ActionButton,
+  Extension,
+  useTiptapStore,
+}
 
 export default AiEditorPlugin
