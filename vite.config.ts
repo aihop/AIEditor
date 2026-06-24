@@ -21,21 +21,18 @@ function cssNamespacePlugin(): Plugin {
           const result = await postcss([
             prefixer({
               prefix: '.ai-editor',
-              transform(prefix, selector, prefixedSelector) {
-                if (
-                  selector.startsWith('.ai-editor') ||
-                  selector.startsWith('.FtContentView')
-                ) {
-                  return selector;
+              transform(_prefix: string, selector: string, prefixedSelector: string) {
+                if (selector.startsWith('.ai-editor') || selector.startsWith('.FtContentView')) {
+                  return selector
                 }
-                return prefixedSelector;
-              }
-            })
-          ]).process(css, { from: undefined });
-          chunk.source = result.css;
+                return prefixedSelector
+              },
+            }),
+          ]).process(css, { from: undefined })
+          chunk.source = result.css
         }
       }
-    }
+    },
   }
 }
 
@@ -45,8 +42,8 @@ export default defineConfig({
     vue(),
     dts({
       insertTypesEntry: true,
-      outDir: '../shoply/lib/ai-editor/',
-      exclude: ['src/demo/**/*', 'examples/**/*']
+      outDir: 'lib',
+      exclude: ['src/demo/**/*', 'examples/**/*'],
     }),
     cssNamespacePlugin(),
     visualizer({
@@ -56,7 +53,7 @@ export default defineConfig({
   ],
   optimizeDeps: {
     include: ['vue'],
-    exclude: ['examples/*', 'src/demo/*']
+    exclude: ['examples/*', 'src/demo/*'],
   },
   resolve: {
     alias: {
@@ -69,11 +66,11 @@ export default defineConfig({
     },
   },
   build: {
-    outDir: '../shoply/lib/ai-editor/',
+    outDir: 'lib',
     lib: {
       entry: path.resolve(__dirname, 'src/index.ts'),
       name: 'AiEditor',
-      fileName: (format) => `ai-editor.${format}.js`,
+      fileName: format => `ai-editor.${format}.js`,
     },
     cssCodeSplit: false,
     rollupOptions: {
@@ -82,12 +79,12 @@ export default defineConfig({
         globals: {
           vue: 'vue',
         },
-        assetFileNames: (info) => {
+        assetFileNames: info => {
           if (info.name && info.name.endsWith('.css')) {
-            return 'style.css';
+            return 'style.css'
           }
-          return 'assets/[name].[hash][extname]';
-        }
+          return 'assets/[name].[hash][extname]'
+        },
       },
       external: ['vue'],
     },

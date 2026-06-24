@@ -1,9 +1,9 @@
 {
-  "name": "ai-editor",
-  "version": "0.6.10",
+  "name": "@aihop/ai-editor",
+  "version": "1.0.0",
   "private": false,
   "license": "MIT",
-  "description": "A modern AI-powered and Highly Customized RichTextEditor for Vue, based on Tiptap and shadcn-vue",
+  "description": "A modern AI-powered, highly customizable rich text editor for Vue, based on Tiptap and shadcn-vue. 一个面向 Vue3 的现代化 AI 富文本编辑器。",
   "author": "aihopv@gmail.com",
   "homepage": "https://github.com/aihop",
   "repository": {

@@ -3,8 +3,8 @@
 A modern AI-powered and highly customized rich-text editor for Vue 3, based on [tiptap](https://tiptap.dev) and [shadcn-vue](https://www.shadcn-vue.com/).
 
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
-[![](https://img.shields.io/npm/v/ai-editor.svg?label=version)](https://www.npmjs.com/package/ai-editor)
-[![](https://img.shields.io/npm/dependency-version/ai-editor/peer/vue?color=vue)](https://www.npmjs.com/package/ai-editor)
+[![](https://img.shields.io/npm/v/%40aihop%2Fai-editor.svg?label=version)](https://www.npmjs.com/package/@aihop/ai-editor)
+[![](https://img.shields.io/npm/dependency-version/%40aihop%2Fai-editor/peer/vue?color=vue)](https://www.npmjs.com/package/@aihop/ai-editor)
 
 English | [中文](./README.zh-CN.md)
 
@@ -24,11 +24,11 @@ English | [中文](./README.zh-CN.md)
 ## Installation
 
 ```bash
-pnpm add ai-editor
+pnpm add @aihop/ai-editor
 # or
-npm i ai-editor
+npm i @aihop/ai-editor
 # or
-yarn add ai-editor
+yarn add @aihop/ai-editor
 ```
 
 ## Quick Start
@@ -39,8 +39,8 @@ yarn add ai-editor
 // main.ts
 import { createApp } from 'vue'
 import App from './App.vue'
-import AiEditor from 'ai-editor'
-import 'ai-editor/style.css'
+import AiEditor from '@aihop/ai-editor'
+import '@aihop/ai-editor/style.css'
 
 createApp(App).use(AiEditor).mount('#app')
 ```
@@ -48,7 +48,7 @@ createApp(App).use(AiEditor).mount('#app')
 ```vue
 <script setup lang="ts">
 import { ref } from 'vue'
-import { BaseKit } from 'ai-editor'
+import { BaseKit } from '@aihop/ai-editor'
 
 const content = ref('')
 const extensions = [
@@ -70,8 +70,8 @@ const extensions = [
 ```vue
 <script setup lang="ts">
 import { ref } from 'vue'
-import { AiEditor, BaseKit } from 'ai-editor'
-import 'ai-editor/style.css'
+import { AiEditor, BaseKit } from '@aihop/ai-editor'
+import '@aihop/ai-editor/style.css'
 
 const content = ref('')
 const extensions = [BaseKit.configure()]
@@ -87,7 +87,7 @@ const extensions = [BaseKit.configure()]
 The AI features are provided by the `AI` extension. You only need to supply a `completions()` function (and optionally shortcut prompts).
 
 ```ts
-import { BaseKit, AI } from 'ai-editor'
+import { BaseKit, AI } from '@aihop/ai-editor'
 
 const extensions = [
   BaseKit.configure(),
@@ -171,7 +171,7 @@ Notes:
 ## I18n
 
 ```ts
-import { locale } from 'ai-editor'
+import { locale } from '@aihop/ai-editor'
 
 locale.setLang('en') // 'en' | 'zhHans'
 ```
