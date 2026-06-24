@@ -23,7 +23,7 @@ export const MarkdownMode = Extension.create<MarkdownModeOptions>({
         return {
           component: ActionButton,
           componentProps: {
-            icon: 'CodeXml',
+            icon: 'Markdown',
             action: () => {
               store.toggleMarkdownMode()
             },

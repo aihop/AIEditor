@@ -208,6 +208,7 @@ export const icons = {
   CodeXml,
   Iframe: AppWindow,
   Comment: ExtraIcons.Comment,
+  Markdown: ExtraIcons.Markdown,
   AIImprove: ExtraIcons.AIImprove,
   AILonger: ExtraIcons.AILonger,
   AIShorter: ExtraIcons.AIShorter,

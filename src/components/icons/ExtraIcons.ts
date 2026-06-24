@@ -61,6 +61,37 @@ export const ExtraIcons = {
       }
     ],
   ]),
+  // Markdown 标志：圆角框 + M + 下箭头，与源码(CodeXml)区分
+  Markdown: createLucideIcon('Markdown', [
+    [
+      'rect',
+      {
+        x: 2,
+        y: 4,
+        width: 20,
+        height: 16,
+        rx: 2,
+        fill: 'none',
+        key: 'md-rect'
+      }
+    ],
+    [
+      'path',
+      {
+        d: 'M6 15V9l3 3 3-3v6',
+        fill: 'none',
+        key: 'md-m'
+      }
+    ],
+    [
+      'path',
+      {
+        d: 'M16 9v6m-2-2 2 2 2-2',
+        fill: 'none',
+        key: 'md-arrow'
+      }
+    ],
+  ]),
   Comment: createLucideIcon('Comment', [
     [
       'path',
