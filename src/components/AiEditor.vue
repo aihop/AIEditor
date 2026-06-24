@@ -154,18 +154,24 @@ watch(
   }
 )
 
-const contentDynamicStyles = computed(() => ({
-  // Only apply built-in fullscreen styles when customFullscreen is false
-  ...(!props.customFullscreen && unref(isFullscreen)
-    ? { height: '100%', overflowY: 'auto' as const }
+// 高度（min/max）落在焦点框那一层（.ai-editor-content-wrap），
+// 这样焦点框就是被定高的盒子，内容区填充并内部滚动，二者高度永远一致，
+// 不会出现“焦点框和内容区对不上 / 两个框”的问题。
+const contentWrapDynamicStyles = computed(() =>
+  !props.customFullscreen && unref(isFullscreen)
+    ? { height: '100%' }
     : {
-        flex: '1',
         minHeight: getCssUnitWithDefault(props.minHeight),
         maxHeight: getCssUnitWithDefault(props.maxHeight),
-        overflowY: 'auto' as const,
-        scrollBehavior: 'smooth',
-        scrollbarWidth: 'thin',
-      }),
+      }
+)
+
+const contentDynamicStyles = computed(() => ({
+  flex: '1',
+  minHeight: 0,
+  overflowY: 'auto' as const,
+  scrollBehavior: 'smooth' as const,
+  scrollbarWidth: 'thin' as const,
   maxWidth: getCssUnitWithDefault(props.maxWidth),
   width: props.maxWidth ? '100%' : undefined,
   margin: props.maxWidth ? '8px auto' : undefined,
@@ -270,6 +276,7 @@ defineExpose({ editor })
         :class="{
           'ai-editor-content-focus': isFocused,
         }"
+        :style="contentWrapDynamicStyles"
       >
         <FindAndReplace
           v-if="hasExtension(editor, 'findAndReplace')"

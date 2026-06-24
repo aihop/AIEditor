@@ -66,11 +66,11 @@ export const ExtraIcons = {
     [
       'rect',
       {
-        x: 2,
-        y: 4,
-        width: 20,
-        height: 16,
-        rx: 2,
+        x: '2',
+        y: '4',
+        width: '20',
+        height: '16',
+        rx: '2',
         fill: 'none',
         key: 'md-rect'
       }
