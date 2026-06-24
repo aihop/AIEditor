@@ -19,7 +19,7 @@ const props = withDefaults(defineProps<Props>(), {
   disabled: false,
 })
 
-const store = useTiptapStore()
+const store = useTiptapStore(props.editor)
 
 const { t } = useLocale()
 const tippyOptions = reactive<Record<string, unknown>>({

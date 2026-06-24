@@ -143,7 +143,7 @@ const { t } = useLocale()
 
 const containerRef = ref(null)
 
-const { state } = useTiptapStore()
+const { state } = useTiptapStore(props.editor)
 const { isDark } = useTheme()
 const code = ref(props.node.attrs.code || props.node.textContent || '')
 let codeEditor = ref<PrismEditor | null>(null)

@@ -2,7 +2,6 @@ import { Extension } from '@tiptap/core'
 import ActionButton from '@/components/ActionButton.vue'
 import type { GeneralOptions } from '@/type'
 import { useTiptapStore } from '@/hooks'
-const store = useTiptapStore()
 
 declare module '@tiptap/core' {
   interface Commands<ReturnType> {
@@ -19,17 +18,20 @@ export const SourceCode = Extension.create<SourceCodeOptions>({
   addOptions() {
     return {
       ...this.parent?.(),
-      button: ({ t }) => ({
-        component: ActionButton,
-        componentProps: {
-          icon: 'CodeXml',
-          action: () => {
-            store.toggleSourceCode()
+      button: ({ editor, t }) => {
+        const store = useTiptapStore(editor)
+        return {
+          component: ActionButton,
+          componentProps: {
+            icon: 'CodeXml',
+            action: () => {
+              store.toggleSourceCode()
+            },
+            tooltip: t('editor.sourceCode.tooltip'),
+            isActive: () => store.state.sourceCode
           },
-          tooltip: t('editor.sourceCode.tooltip'),
-          isActive: () => store.state.sourceCode
-        },
-      }),
+        }
+      },
     }
   },
   addCommands() {
@@ -37,7 +39,7 @@ export const SourceCode = Extension.create<SourceCodeOptions>({
       toggleSourceCode:
         () =>
           ({ editor }) => {
-            store.toggleSourceCode()
+            useTiptapStore(editor).toggleSourceCode()
             return true
           },
     }

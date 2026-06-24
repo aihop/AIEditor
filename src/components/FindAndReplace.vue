@@ -25,7 +25,7 @@ const props = withDefaults(defineProps<Props>(), {
 
 const emit = defineEmits(['update:modelValue', 'find', 'replace'])
 const inputRef = ref<HTMLInputElement | null>(null)
-const store = useTiptapStore()
+const store = useTiptapStore(props.editor)
 const searchTerm = ref<string>('')
 const replaceTerm = ref<string>('')
 const caseSensitive = ref<boolean>(false)

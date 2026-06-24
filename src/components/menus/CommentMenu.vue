@@ -23,7 +23,7 @@ const props = withDefaults(defineProps<Props>(), {
 })
 
 // 状态管理
-const store = useTiptapStore()
+const store = useTiptapStore(props.editor)
 const content = ref<string>('') // 评论内容
 const inputRef = ref<HTMLInputElement | null>(null)
 const { focused } = useFocus(inputRef)

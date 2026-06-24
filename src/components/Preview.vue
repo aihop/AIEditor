@@ -18,7 +18,7 @@ const props = withDefaults(defineProps<Props>(), {
   disabled: false,
 })
 const { t } = useLocale()
-const store = useTiptapStore()
+const store = useTiptapStore(props.editor)
 const resizableRef = ref<InstanceType<typeof ResizablePanel>>()
 
 function openChange(e: boolean) {

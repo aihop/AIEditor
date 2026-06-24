@@ -27,7 +27,7 @@ const props = withDefaults(defineProps<Props>(), {
 })
 
 const selectedColor = ref<string | undefined>(undefined)
-const { state } = useTiptapStore()!
+const { state } = useTiptapStore(props.editor)
 
 function onChange(color: string | undefined) {
   props.action?.(color)

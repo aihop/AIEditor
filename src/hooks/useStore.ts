@@ -1,8 +1,6 @@
-import { computed, reactive, watchEffect } from 'vue'
+import { computed, reactive } from 'vue'
 
 import type { AnyExtension } from '@tiptap/core'
-import { createGlobalState } from '@vueuse/core'
-import { useContext } from './useContext'
 
 import { DEFAULT_LANG_VALUE } from '@/constants'
 
@@ -66,17 +64,23 @@ interface Instance {
   disabled: boolean
 }
 
-export const useTiptapStore = createGlobalState(() => {
-  const { state: _state } = useContext()
-
+/**
+ * 创建一个独立的编辑器状态实例。
+ *
+ * 注意：之前使用 `createGlobalState` 让整个状态成为全页单例，
+ * 导致同一页面挂载多个编辑器时彼此串状态（全屏 / markdown / 源码 / 预览
+ * 等开关互相影响，全屏遮罩 z-index 叠加产生层级问题）。
+ * 现在改为每个编辑器实例各自持有一份状态。
+ */
+function createTiptapStore() {
   const state: Instance = reactive({
-    extensions: _state.extensions ?? [],
+    extensions: [],
     defaultLang: DEFAULT_LANG_VALUE,
     isFullscreen: false,
     color: undefined,
     highlight: undefined,
     AIMenu: false,
-    AIMenuShortcut:true,
+    AIMenuShortcut: true,
     CommentMenu: false,
     sourceCode: false,
     markdownMode: false,
@@ -115,11 +119,6 @@ export const useTiptapStore = createGlobalState(() => {
     state.disabled = disabled
   }
 
-  watchEffect(() => {
-    state.extensions = _state.extensions
-    state.defaultLang = _state.defaultLang
-  })
-
   return {
     state,
     isFullscreen,
@@ -132,4 +131,36 @@ export const useTiptapStore = createGlobalState(() => {
     toggleMarkdownMode,
     setDisabled,
   }
-})
+}
+
+export type TiptapStore = ReturnType<typeof createTiptapStore>
+
+/**
+ * 每个编辑器实例对应一份状态，按 editor 实例做键缓存。
+ * 使用 WeakMap，编辑器销毁后状态自动回收。
+ */
+const storeMap = new WeakMap<object, TiptapStore>()
+
+/** 无 editor 时的回退实例（兼容在组件 setup 之外、拿不到 editor 的调用） */
+let fallbackStore: TiptapStore | null = null
+
+/**
+ * 获取（或创建）某个编辑器实例对应的状态 store。
+ *
+ * @param editor 该状态所属的编辑器实例。库内组件请传 `props.editor`，
+ *               扩展请在 button / command 回调里传入参数 `editor`。
+ *               不传则回退到一个共享实例（仅为兼容旧用法，多实例下不建议）。
+ */
+export function useTiptapStore(editor?: object | null): TiptapStore {
+  if (editor) {
+    let store = storeMap.get(editor)
+    if (!store) {
+      store = createTiptapStore()
+      storeMap.set(editor, store)
+    }
+    return store
+  }
+
+  if (!fallbackStore) fallbackStore = createTiptapStore()
+  return fallbackStore
+}

@@ -11,29 +11,33 @@ declare module '@tiptap/core' {
     }
   }
 }
-const { isFullscreen, toggleFullscreen } = useTiptapStore()
 export const Fullscreen = Extension.create<FullscreenOptions>({
   name: 'fullscreen',
   addOptions() {
     return {
       ...this.parent?.(),
-      button: ({ editor, extension, t }) => ({
-        component: ActionButton,
-        componentProps: {
-          tooltip: isFullscreen.value ? t('editor.fullscreen.tooltip.exit') : t('editor.fullscreen.tooltip.fullscreen'),
-          action: () => editor?.chain().setFullscreen().focus().run(),
-          icon: isFullscreen.value ? 'Minimize' : 'Maximize',
-          isActive: () => isFullscreen.value,
-        },
-      }),
+      button: ({ editor, extension, t }) => {
+        const { isFullscreen } = useTiptapStore(editor)
+        return {
+          component: ActionButton,
+          componentProps: {
+            tooltip: isFullscreen.value
+              ? t('editor.fullscreen.tooltip.exit')
+              : t('editor.fullscreen.tooltip.fullscreen'),
+            action: () => editor?.chain().setFullscreen().focus().run(),
+            icon: isFullscreen.value ? 'Minimize' : 'Maximize',
+            isActive: () => isFullscreen.value,
+          },
+        }
+      },
     }
   },
   addCommands() {
     return {
       setFullscreen:
         () =>
-          () => {
-            toggleFullscreen()
+          ({ editor }) => {
+            useTiptapStore(editor).toggleFullscreen()
             return true
           }
     }
@@ -41,11 +45,11 @@ export const Fullscreen = Extension.create<FullscreenOptions>({
   addKeyboardShortcuts() {
     return {
       F11: () => {
-        toggleFullscreen()
+        useTiptapStore(this.editor).toggleFullscreen()
         return true
       },
       'Mod-F11': () => {
-        toggleFullscreen()
+        useTiptapStore(this.editor).toggleFullscreen()
         return true
       },
     }

@@ -118,7 +118,7 @@ import {
 import { useTiptapStore } from '../hooks/index'
 
 function closeAIMenuShortcut() {
-  const store = useTiptapStore()
+  const store = useTiptapStore(editor.value?.editor)
   store.state.AIMenuShortcut = false
 }
 

@@ -44,7 +44,7 @@ const props = withDefaults(defineProps<Props>(), {
   disabled: false,
 })
 
-const { state } = useTiptapStore()
+const { state } = useTiptapStore(props.editor)
 const srcdoc = ref('')
 const iframeRef = ref<HTMLIFrameElement | null>(null)
 

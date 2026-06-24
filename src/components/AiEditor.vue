@@ -6,7 +6,7 @@ import type { AnyExtension, JSONContent } from '@tiptap/core'
 import { Editor, EditorContent } from '@tiptap/vue-3'
 import type { EditorOptions } from '@tiptap/vue-3'
 import { EDITOR_UPDATE_THROTTLE_WAIT_TIME } from '@/constants'
-import { differenceBy, getCssUnitWithDefault, hasExtension, isEqual, throttle } from '@/utils/utils'
+import { getCssUnitWithDefault, hasExtension, isEqual, throttle } from '@/utils/utils'
 import { isLikelyMarkdown, markdownToHtml } from '@/utils'
 import { useLocale } from '@/locales'
 import { useTiptapStore } from '@/hooks'
@@ -59,7 +59,6 @@ const props = withDefaults(defineProps<AiEditorProps>(), {
 const emit = defineEmits<AiEditorEmits>()
 
 const attrs = useAttrs()
-const { state, isFullscreen, setDisabled } = useTiptapStore()
 
 const { t } = useLocale()
 const isDark = useDark()
@@ -68,9 +67,7 @@ const contentRef = ref<HTMLElement | null>(null)
 const { setTheme, setBorderRadius } = useTheme()
 
 const sortExtensions = computed<AnyExtension[]>(() =>
-  [...state.extensions, ...differenceBy(props.extensions, state.extensions, 'name')].map((k, i) =>
-    k.configure({ sort: i })
-  )
+  props.extensions.map((k, i) => k.configure({ sort: i }))
 )
 
 const editorConfig = computed<Partial<EditorOptions>>(() => ({
@@ -116,6 +113,9 @@ const editorConfig = computed<Partial<EditorOptions>>(() => ({
 }))
 
 const editor = new Editor(unref(editorConfig))
+
+// 每个编辑器实例独享一份状态，避免同页多实例互相串状态 / 层级冲突
+const { state, isFullscreen, setDisabled } = useTiptapStore(editor)
 
 const { isFocused } = useEditorFocus({ editor })
 

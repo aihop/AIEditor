@@ -25,7 +25,7 @@ const props = withDefaults(defineProps<Props>(), {
   disabled: false,
 })
 
-const store = useTiptapStore()
+const store = useTiptapStore(props.editor)
 const prompt = ref<string>('')
 const cachedPrompt = ref<CachedPrompt | null>(null)
 const inputRef = ref<HTMLInputElement | null>(null)

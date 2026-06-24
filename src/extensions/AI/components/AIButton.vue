@@ -36,7 +36,7 @@ const props = withDefaults(defineProps<Props>(), {
   isActive: undefined,
 })
 
-const store = useTiptapStore()
+const store = useTiptapStore(props.editor)
 const { toast } = useToast()
 
 function handleOpen() {

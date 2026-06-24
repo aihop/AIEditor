@@ -37,7 +37,7 @@ const props = withDefaults(defineProps<Props>(), {
   isActive: undefined,
 })
 
-const store = useTiptapStore()
+const store = useTiptapStore(props.editor)
 
 /**
  * 处理点击事件 - 打开评论输入框

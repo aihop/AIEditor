@@ -1,8 +1,6 @@
 import { Extension } from '@tiptap/core'
 import type { GeneralOptions } from '@/type'
-import { useTiptapStore } from '@/hooks'
 import Button from './Button.vue'
-const store = useTiptapStore()
 
 declare module '@tiptap/core' {
   interface Commands<ReturnType> {
